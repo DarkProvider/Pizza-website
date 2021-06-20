@@ -1,2 +1,2 @@
-# phptuts
-This repo is made for learning PHP
+# The Pizza serving website project
+This repo is made for learning the concepts of PHP and training while making a pizza website that inserts data, process them and then outputs them into another tab with the ability to customize and delete them. It is also a training about how to prevent users from tampering into data and prevent them from using different methods like SQL injection to modify the data and get something that doesn't exist.
