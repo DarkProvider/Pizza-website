@@ -1,16 +1,6 @@
 <?php
 
-// MySQLi = Improved MySQL or PDO = is for advanced devs
-
-$conn = mysqli_connect('localhost', 'DailyEstel', 'test123', 'php_pizza');
-
-
-// Check connection
-if(!$conn) {
-
-    echo 'Connection error' . mysqli_connect_error();
-
-}
+include('config/db_connect.php');
 
 
 // Write query for all pizzas
@@ -32,7 +22,13 @@ mysqli_free_result($result);
 mysqli_close($conn);
 
 
-print_r($pizzas);
+// print_r($pizzas);
+
+
+// Explode function helps us take a string of characters that meat a certain condition and put them into an array for examle for later use. In this case the explode funtion is looking for what behind a comma to grab 
+// explode(',', $pizzas[0]['ingredients']);
+
+
 
 ?>
 
@@ -47,24 +43,43 @@ print_r($pizzas);
             <div class="row">
             
                 <?php
-                    foreach($pizzas as $pizza){
+                    foreach($pizzas as $pizza):
+
+                        //It is inefficient to have the loops working at all times and therefore we removed the curly braces that used to be there instead of the colon and replaced them with a colon at the top and with an "endforeach;" function to end the loop 
                 ?>
 
                     <div class="col s6 md3">
                     
                         <div class="card z-depth-0">
+                            <img src="assets/images/Pizza.png" class="pizza" alt="">
                             <div class="card-content center">
-                                <h6><?php echo htmlspecialchars($pizza['title']); ?></h6>
-                                <div><?php echo htmlspecialchars($pizza['ingredients']);?></div>
+                                <h6><?php echo htmlspecialchars($pizza['title']) ?></h6>
+                                <div>
+                                    <ul>
+                                        
+                                        <?php foreach(explode(',', $pizza['ingredients']) as $ing):
+                                            ?>
+                                            <li>
+                                                <?php echo htmlspecialchars($ing); ?>
+                                            </li>
+                                       <?php endforeach; ?>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="card-action right-align">
-                                <a href="#" class="brand-text">More info</a>
+                                <a href="details.php?id=<?php echo $pizza['id']?>" class="brand-text">More info</a>
                             </div>
                         </div>
 
                     </div>
 
-                <?php }?>
+                <?php endforeach; ?>
+
+                <?php if(count($pizzas) >= 2): ?>
+                <p class="white-text"> There are 2 or more Pizzas</p>
+                <?php  else:  ?>
+                <p class="white-text"> There are less than 2 pizzas</p>
+                <?php endif; ?>
 
             </div>
 

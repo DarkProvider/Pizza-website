@@ -28,6 +28,15 @@
         .white {
             border-radius: 5px;
         }
+        .pizza{
+
+            width: 140px;
+            margin: 40px auto -30px;
+            display: block;
+            position: relative;
+            top: -30px;
+
+        }
         /* #submit {
             padding-top: 10px;   
         } */
@@ -38,10 +47,10 @@
 <body class=""> 
     <nav class="white z-depth-0">
         <div class="container">
-            <a href="#" class="center brand-logo brand-text">PHP Pizza</a>
+            <a href="index.php" class="center brand-logo brand-text">PHP Pizza</a>
             <ul id="nav-mobile" class="right hide-on-small-and-down">
-                <li><a href="#" class="btn brand z-depth-0">Add a Pizza</a></li>
-                <li><a href="#" class="btn brand z-depth-0">Remove a Pizza</a></li>
+                <li><a href="add.php" class="btn brand z-depth-0">Add a Pizza</a></li>
+                <li><a href="index.php" class="btn brand z-depth-0">Remove a Pizza</a></li>
             </ul>
         </div>
     </nav>

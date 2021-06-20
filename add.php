@@ -2,6 +2,7 @@
 
 
 
+    include('config/db_connect.php');
 
 
     // Those are defined as to make them empty until the submit button is pressed and the request has been passed
@@ -61,7 +62,29 @@
             //echo 'Something went wrong within the form!';
         } else {
             //echo 'form is valid!';
-            header('Location: index.php');
+            // mysqli real escape function helps us protect the data going into the db. It is mostly useful when you want ot prevent any kind of injection  into the db
+            $email = mysqli_real_escape_string($conn, $_POST['email']);
+            $title = mysqli_real_escape_string($conn, $_POST['title']);
+            $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
+
+
+            // Create sql 
+
+            $sql = "INSERT INTO pizzas(title, email, ingredients) VALUES('$title', '$email' ,'$ingredients')";
+
+            // Save to db and check for errors
+
+            if(mysqli_query($conn, $sql)){
+
+                // success
+                header('Location: index.php');
+
+            } else {
+
+                // Failed
+                echo 'query error: ' . mysqli_error($conn);
+
+            }
         }
 
     } //End of POST check
